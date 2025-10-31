@@ -1,0 +1,81 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "laravel/laravel",
+    "type": "project",
+    "description": "The skeleton application for the Laravel framework.",
+    "keywords": [
+        "laravel",
+        "framework"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^8.2",
+        "hybridly/laravel": "*",
+        "laravel/framework": "^12.0",
+        "laravel/tinker": "^2.10.1",
+        "spatie/laravel-data": "*"
+    },
+    "require-dev": {
+        "barryvdh/laravel-ide-helper": "*",
+        "fakerphp/faker": "^1.23",
+        "laravel/boost": "^1.6",
+        "laravel/pail": "^1.2.2",
+        "laravel/pint": "^1.24",
+        "laravel/sail": "^1.41",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.6",
+        "spatie/laravel-typescript-transformer": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/",
+            "Infrastructure\\": "src/Infrastructure/",
+            "Support\\": "src/Support/",
+            "Database\\Seeders\\": "database/seeders/"
+        },
+        "files": [
+            "src/Support/functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "scripts": {
+        "test": "pest",
+        "dep": "set -o allexport && source ./.env && set +o allexport && vendor/bin/dep",
+        "lint": "php-cs-fixer fix --allow-risky=yes --dry-run",
+        "lint:fix": "php-cs-fixer fix --allow-risky=yes",
+        "post-update-cmd": "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+        "post-root-package-install": "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+        "post-create-project-cmd": "@php artisan key:generate --ansi",
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi",
+            "([ $COMPOSER_DEV_MODE -eq 1 ] && composer autocomplete) || true"
+        ],
+        "autocomplete": [
+            "@php artisan ide-helper:eloquent || true",
+            "@php artisan ide-helper:generate || true",
+            "@php artisan ide-helper:meta || true",
+            "@php artisan ide-helper:models -M || true"
+        ]
+    }
+}
