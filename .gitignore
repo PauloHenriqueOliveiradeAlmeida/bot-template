@@ -26,3 +26,6 @@ Thumbs.db
 .hybridly
 _ide_helper*
 .phpstorm.meta.php
+
+typesense-data
+mongo-data

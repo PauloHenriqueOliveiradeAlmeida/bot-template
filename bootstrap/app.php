@@ -1,5 +1,10 @@
 <?php
 
+use App\Config\HttpKernel;
+use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Foundation\Console\Kernel;
+use Illuminate\Foundation\Exceptions\Handler;
+
 /*
 |--------------------------------------------------------------------------
 | Create The Application
@@ -28,18 +33,19 @@ $application = (new \Illuminate\Foundation\Application(
 
 $application->singleton(
     Illuminate\Contracts\Http\Kernel::class,
-    \Infrastructure\Http\Kernel::class,
+    HttpKernel::class,
 );
 
 $application->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    \Infrastructure\Console\Kernel::class,
+    Kernel::class,
 );
 
 $application->singleton(
-    Illuminate\Contracts\Debug\ExceptionHandler::class,
-    \App\Feature\ErrorReporting\ExceptionHandler::class,
+    ExceptionHandler::class,
+    Handler::class
 );
+
 
 /*
 |--------------------------------------------------------------------------

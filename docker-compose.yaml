@@ -1,0 +1,20 @@
+services:
+  typesense:
+    image: typesense/typesense:29.0
+    restart: on-failure
+    ports:
+      - "8108:8108"
+    volumes:
+      - ./typesense-data:/data
+    command: '--data-dir /data --api-key=xyz --enable-cors'
+
+  mongodb:
+    image: mongo:6.0
+    restart: on-failure
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: xyz
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo-data:/data/db
